@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Dmitry Ordin](https://up.htmlacademy.ru/javascript/20/user/122528).
-* Наставник: `Неизвестно`.
+* Наставник: [Ярослав Косович](https://htmlacademy.ru/profile/id703025).
 
 ---
 
