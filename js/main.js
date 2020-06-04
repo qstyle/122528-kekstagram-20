@@ -1,27 +1,30 @@
 'use strict';
 
 // функция рандома
-var generateRandom = function (randomMax) {
+var generateRandom = function (randomMin, randomMax) {
   var randomValue = Math.round((Math.random() * randomMax));
+  if (randomValue < randomMin) {
+    randomValue += randomMin;
+  }
   return randomValue;
 };
+
+// генерация коментариев
 
 
 // гернерация фото
 var generateBlockPhoto = function () {
-  var BlockPhoto = [];
-
-  for (var i = 1; i <= 25; i++) {
-    
-    var BlockPhotoObj = {
-      url: 'photos/' + (i) + '.jpg',
+  var blockPhoto = [];
+  for (var i = 0; i < 25; i++) {
+    var blockPhotoObj = {
+      url: 'photos/' + (i + 1) + '.jpg',
       description: 'blablabla',
-      likes: generateRandom(250),
-      comments: 'randomComent()'
+      likes: generateRandom(15, 250),
+      comments: 'generatePhotoComment()'
     };
-    BlockPhoto[i] = BlockPhotoObj;
-    BlockPhoto.push(i);
+    blockPhoto[i] = blockPhotoObj;
+
   }
-  console.log(BlockPhoto);
+  console.log(blockPhoto);
 };
 generateBlockPhoto();
