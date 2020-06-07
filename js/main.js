@@ -8,7 +8,7 @@ var generateRandom = function (randomMin, randomMax) {
   }
   return randomValue;
 };
-
+var comment = {};
 // генерация коментариев
 function generateComments() {
   var randomComment = generateRandom(0, 5);
@@ -24,35 +24,40 @@ function generateComments() {
     'name1', 'name2', 'name3', 'name4', 'name5', 'name6'
   ];
   var randomAvatar = [1, 2, 3, 4, 5, 6];
-  var comment = {
+  comment = {
     avatar: 'img/avatar-' + randomAvatar[randomComment] + '.svg',
     message: messageComent[randomComment],
     name: nameComent[randomComment]
   };
   return comment;
 }
-
+var blockPhoto = [];
 // гернерация фото
 var generateBlockPhoto = function () {
-  var blockPhoto = [];
+
   for (var i = 0; i < 25; i++) {
     var blockPhotoObj = {
       url: 'photos/' + (i + 1) + '.jpg',
       description: 'blablabla',
-      likes: generateRandom(15, 250),
+      likes: 'generateRandom(15, 250)',
       comments: generateComments()
     };
     blockPhoto[i] = blockPhotoObj;
 
   }
-  console.log(blockPhoto);
+  return (blockPhoto);
 };
+
+
 generateBlockPhoto();
+var picturesContainer = document.querySelector('.pictures');
+var photoElementBlock = document.querySelector('#picture') .content.querySelector('.picture');
 
-var userPhotoTemplate = document.querySelector('#picture')
-.content
-.querySelector('.picture');
-for (i = 0; i > 25; i++) {
-  var photoElement = userPhoto.cloneNode(true);
+for (var i = 0; i < blockPhoto.length; i++) {
+  var photoElementClone = photoElementBlock.cloneNode(true);
+  picturesContainer.appendChild(photoElementClone);
+  photoElementClone.querySelector('.picture__img').src = blockPhoto[i].url;
 
+
+  photoElementClone.querySelector('.picture__comments').textContent = generateComments();
 }
