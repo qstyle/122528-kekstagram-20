@@ -8,17 +8,10 @@ var generateRandom = function (randomMin, randomMax) {
   }
   return randomValue;
 };
-// генерация имени
-var generateName = function () {
-  var nameComent = [
-    'name1', 'name2', 'name3', 'name4', 'name5', 'name6'
-  ];
-  var NameRandom = nameComent[generateRandom(1, 6)];
-  return NameRandom;
-};
 
-// генерация сообщения
-var generateMessage = function () {
+// генерация коментариев
+function generateComments() {
+  var randomComment = generateRandom(0, 5);
   var messageComent = [
     'Всё отлично!',
     'В целом всё неплохо. Но не всё.',
@@ -27,24 +20,17 @@ var generateMessage = function () {
     'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
   ];
-  var messageRandom = messageComent[generateRandom(1, 6)];
-  return messageRandom;
-};
-// генерация аватара
-var generateAvatar = function () {
-  var avatarRandom = 'img/avatar-' + generateRandom(1, 6) + '.svg';
-  return avatarRandom;
-};
-
-// генерация коментариев
-var generateComments = function () {
+  var nameComent = [
+    'name1', 'name2', 'name3', 'name4', 'name5', 'name6'
+  ];
+  var randomAvatar = [1, 2, 3, 4, 5, 6];
   var comment = {
-    avatar: generateAvatar(),
-    message: generateMessage(),
-    name: generateName()
+    avatar: 'img/avatar-' + randomAvatar[randomComment] + '.svg',
+    message: messageComent[randomComment],
+    name: nameComent[randomComment]
   };
   return comment;
-};
+}
 
 // гернерация фото
 var generateBlockPhoto = function () {
