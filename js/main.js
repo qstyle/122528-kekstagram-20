@@ -48,3 +48,11 @@ var generateBlockPhoto = function () {
   console.log(blockPhoto);
 };
 generateBlockPhoto();
+
+var userPhotoTemplate = document.querySelector('#picture')
+.content
+.querySelector('.picture');
+for (i = 0; i > 25; i++) {
+  var photoElement = userPhoto.cloneNode(true);
+
+}
