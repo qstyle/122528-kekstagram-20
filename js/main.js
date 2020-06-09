@@ -51,13 +51,25 @@ var generateBlockPhoto = function () {
 
 
 generateBlockPhoto();
+
+// создание блока фото
 var picturesContainer = document.querySelector('.pictures');
 var photoElementBlock = document.querySelector('#picture') .content.querySelector('.picture');
 
-for (var i = 0; i < blockPhoto.length; i++) {
+function rendrBlockPhoto(rednerBlock) {
   var photoElementClone = photoElementBlock.cloneNode(true);
   picturesContainer.appendChild(photoElementClone);
-  photoElementClone.querySelector('.picture__img').src = blockPhoto[i].url;
-  photoElementClone.querySelector('.picture__likes').textContent = blockPhoto[i].likes;
-  photoElementClone.querySelector('.picture__comments').textContent = blockPhoto[i].commentsObj.avatar + blockPhoto[i].commentsObj.message + blockPhoto[i].commentsObj.name;
+  photoElementClone.querySelector('.picture__img').src = rednerBlock.url;
+  photoElementClone.querySelector('.picture__likes').textContent = rednerBlock.likes;
+  photoElementClone.querySelector('.picture__comments').textContent = rednerBlock.commentsObj.avatar + rednerBlock.commentsObj.message + rednerBlock.commentsObj.name;
+  return photoElementClone;
 }
+
+
+// рендер всех блоков
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < blockPhoto.length; i++) {
+  fragment.appendChild(rendrBlockPhoto(blockPhoto[i]));
+}
+
+picturesContainer.appendChild(fragment);
