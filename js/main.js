@@ -36,11 +36,12 @@ var blockPhoto = [];
 var generateBlockPhoto = function () {
 
   for (var i = 0; i < 25; i++) {
+    var comments = generateComments();
     var blockPhotoObj = {
       url: 'photos/' + (i + 1) + '.jpg',
       description: 'blablabla',
-      likes: 'generateRandom(15, 250)',
-      comments: generateComments()
+      likes: generateRandom(15, 250),
+      commentsObj: comments
     };
     blockPhoto[i] = blockPhotoObj;
 
@@ -57,7 +58,6 @@ for (var i = 0; i < blockPhoto.length; i++) {
   var photoElementClone = photoElementBlock.cloneNode(true);
   picturesContainer.appendChild(photoElementClone);
   photoElementClone.querySelector('.picture__img').src = blockPhoto[i].url;
-
-
-  photoElementClone.querySelector('.picture__comments').textContent = generateComments();
+  photoElementClone.querySelector('.picture__likes').textContent = blockPhoto[i].likes;
+  photoElementClone.querySelector('.picture__comments').textContent = blockPhoto[i].commentsObj.avatar + blockPhoto[i].commentsObj.message + blockPhoto[i].commentsObj.name;
 }
