@@ -9,6 +9,7 @@ var generateRandom = function (randomMin, randomMax) {
   return randomValue;
 };
 var comment = {};
+
 // генерация коментариев
 function generateComments() {
   var randomComment = generateRandom(0, 5);
@@ -32,9 +33,9 @@ function generateComments() {
   return comment;
 }
 var blockPhoto = [];
+
 // гернерация фото
 var generateBlockPhoto = function () {
-
   for (var i = 0; i < 25; i++) {
     var comments = generateComments();
     var blockPhotoObj = {
@@ -44,12 +45,9 @@ var generateBlockPhoto = function () {
       commentsObj: comments
     };
     blockPhoto[i] = blockPhotoObj;
-
   }
   return (blockPhoto);
 };
-
-
 generateBlockPhoto();
 
 // создание блока фото
@@ -64,7 +62,6 @@ function rendrBlockPhoto(rednerBlock) {
   photoElementClone.querySelector('.picture__comments').textContent = rednerBlock.commentsObj.avatar + rednerBlock.commentsObj.message + rednerBlock.commentsObj.name;
   return photoElementClone;
 }
-
 
 // рендер всех блоков
 var fragment = document.createDocumentFragment();
