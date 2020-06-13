@@ -2,13 +2,13 @@
 'use strict';
 
 // функция рандома
-var generateRandom = function (randomMin, randomMax) {
+function generateRandom(randomMin, randomMax) {
   var randomValue = Math.round((Math.random() * randomMax));
   if (randomValue < randomMin) {
     randomValue += randomMin;
   }
   return randomValue;
-};
+}
 
 // генерация сообщения коментария
 function generateMessage() {
@@ -29,18 +29,18 @@ function generateMessage() {
 }
 
 // генерация коментариев
-var generateComment = function () {
+function generateComment() {
   var comment = {};
   var randomAvatar = [1, 2, 3, 4, 5, 6];
   var nameComent = [
     'name1', 'name2', 'name3', 'name4', 'name5', 'name6'];
   comment = {
-    avatar: 'img/avatar-' + randomAvatar[generateComment] + '.svg',
+    avatar: 'img/avatar-' + randomAvatar[generateRandom(0, 5)] + '.svg',
     message: generateMessage(),
     name: nameComent[generateRandom(0, 5)]
   };
   return comment;
-};
+}
 
 function generateComments() {
   var comments = [];
@@ -80,13 +80,13 @@ var renderBlockPhoto = function (rednerBlock) {
 };
 
 // рендер всех блоков
-var rednerBlockAll = function () {
+function rednerBlockAll() {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < blockPhoto.length; i++) {
     fragment.appendChild(renderBlockPhoto(blockPhoto[i]));
   }
   return fragment;
-};
+}
 picturesContainer.appendChild(rednerBlockAll());
 
 
