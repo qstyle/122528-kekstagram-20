@@ -89,7 +89,6 @@ function rednerBlockAll() {
 }
 picturesContainer.appendChild(rednerBlockAll());
 
-
 // генерация коментария для большого фото
 function generateCommentBigPicture(arrayComment) {
   var elementCommentBigPicture = document.querySelector('#big_picture').content;
@@ -99,6 +98,7 @@ function generateCommentBigPicture(arrayComment) {
   BigPictureClone.querySelector('.social__text').textContent = arrayComment.message;
   return BigPictureClone;
 }
+
 // отрисовка развернутой картинки
 function openBigPicture(arrayPhoto) {
   var bigPicture = document.querySelector('.big-picture');
