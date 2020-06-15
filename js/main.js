@@ -90,3 +90,34 @@ function rednerBlockAll() {
 picturesContainer.appendChild(rednerBlockAll());
 
 
+// генерация коментария для большого фото
+function generateCommentBigPicture(arrayComment) {
+  var elementCommentBigPicture = document.querySelector('#big_picture').content;
+  var BigPictureClone = elementCommentBigPicture.cloneNode(true);
+  BigPictureClone.querySelector('.social__picture').src = arrayComment.avatar;
+  BigPictureClone.querySelector('.social__picture').alt = arrayComment.name;
+  BigPictureClone.querySelector('.social__text').textContent = arrayComment.message;
+  return BigPictureClone;
+}
+// отрисовка развернутой картинки
+function openBigPicture(arrayPhoto) {
+  var bigPicture = document.querySelector('.big-picture');
+  bigPicture.classList.remove('hidden');
+  var bigPictureImg = document.querySelector('.big-picture__img img');
+  var bigPictureLikes = document.querySelector('.likes-count');
+  var bigPictureDescription = document.querySelector('.social__caption');
+  var bigPictureComentsCount = document.querySelector('.comments-count');
+  var bigPictureComents = document.querySelector('.social__comments');
+  var bigSocalPictureComents = document.querySelector('.social__comment-count');
+  var bigPictureComentsLoader = document.querySelector('.comments-loader');
+  var body = document.querySelector('body');
+  bigPictureImg.src = arrayPhoto.url;
+  bigPictureLikes.textContent = arrayPhoto.likes;
+  bigPictureDescription.textContent = arrayPhoto.description;
+  bigPictureComentsCount.textContent = arrayPhoto.comments.length;
+  bigPictureComents.appendChild(generateCommentBigPicture(blockPhoto[0].comments[0]));
+  bigSocalPictureComents.classList.add('hidden');
+  bigPictureComentsLoader.classList.add('hidden');
+  body.classList.add('modal-open');
+}
+openBigPicture(blockPhoto[0]);
