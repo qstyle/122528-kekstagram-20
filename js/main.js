@@ -92,15 +92,15 @@ picturesContainer.appendChild(rednerBlockAll());
 // генерация коментария для большого фото
 function generateCommentBigPicture(arrayComment) {
   var elementCommentBigPicture = document.querySelector('#big_picture').content;
-  var BigPictureClone = elementCommentBigPicture.cloneNode(true);
-  BigPictureClone.querySelector('.social__picture').src = arrayComment.avatar;
-  BigPictureClone.querySelector('.social__picture').alt = arrayComment.name;
-  BigPictureClone.querySelector('.social__text').textContent = arrayComment.message;
-  return BigPictureClone;
+  var bigPictureClone = elementCommentBigPicture.cloneNode(true);
+  bigPictureClone.querySelector('.social__picture').src = arrayComment.avatar;
+  bigPictureClone.querySelector('.social__picture').alt = arrayComment.name;
+  bigPictureClone.querySelector('.social__text').textContent = arrayComment.message;
+  return bigPictureClone;
 }
 
 // отрисовка развернутой картинки
-function openBigPicture(arrayPhoto) {
+function openBigPicture(photoObject) {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img');
@@ -111,11 +111,11 @@ function openBigPicture(arrayPhoto) {
   var bigSocalPictureComents = document.querySelector('.social__comment-count');
   var bigPictureComentsLoader = document.querySelector('.comments-loader');
   var body = document.querySelector('body');
-  bigPictureImg.src = arrayPhoto.url;
-  bigPictureLikes.textContent = arrayPhoto.likes;
-  bigPictureDescription.textContent = arrayPhoto.description;
-  bigPictureComentsCount.textContent = arrayPhoto.comments.length;
-  bigPictureComents.appendChild(generateCommentBigPicture(blockPhoto[0].comments[0]));
+  bigPictureImg.src = photoObject.url;
+  bigPictureLikes.textContent = photoObject.likes;
+  bigPictureDescription.textContent = photoObject.description;
+  bigPictureComentsCount.textContent = photoObject.comments.length;
+  bigPictureComents.appendChild(generateCommentBigPicture(photoObject.comments[0]));
   bigSocalPictureComents.classList.add('hidden');
   bigPictureComentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
