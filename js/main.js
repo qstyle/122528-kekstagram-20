@@ -1,4 +1,3 @@
-
 'use strict';
 
 // функция рандома
@@ -33,7 +32,8 @@ function generateComment() {
   var comment = {};
   var randomAvatar = [1, 2, 3, 4, 5, 6];
   var nameComent = [
-    'name1', 'name2', 'name3', 'name4', 'name5', 'name6'];
+    'name1', 'name2', 'name3', 'name4', 'name5', 'name6'
+  ];
   comment = {
     avatar: 'img/avatar-' + randomAvatar[generateRandom(0, 5)] + '.svg',
     message: generateMessage(),
@@ -70,7 +70,7 @@ var blockPhoto = generateBlockPhoto(25);
 // создание блока фото
 
 var picturesContainer = document.querySelector('.pictures');
-var photoElementBlock = document.querySelector('#picture') .content;
+var photoElementBlock = document.querySelector('#picture').content;
 var renderBlockPhoto = function (rednerBlock) {
   var photoElementClone = photoElementBlock.cloneNode(true);
   photoElementClone.querySelector('.picture__img').src = rednerBlock.url;
@@ -115,7 +115,9 @@ function openBigPicture(photoObject) {
   bigPictureLikes.textContent = photoObject.likes;
   bigPictureDescription.textContent = photoObject.description;
   bigPictureComentsCount.textContent = photoObject.comments.length;
-  bigPictureComents.appendChild(generateCommentBigPicture(photoObject.comments[0]));
+  for (var i = 0; i <= photoObject.comments.length; i++) {
+    bigPictureComents.appendChild(generateCommentBigPicture(photoObject.comments[i]));
+  }
   bigSocalPictureComents.classList.add('hidden');
   bigPictureComentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
