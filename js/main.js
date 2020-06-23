@@ -137,8 +137,6 @@ function validityHashtag(hashtag) {
       inputArea.setCustomValidity('alarm alarm3');
     } else if (hashtag.length > 5) {
       inputArea.setCustomValidity('alarm alarm4');
-    } else {
-      return true;
     }
   }
 
@@ -165,9 +163,11 @@ function zoomer(valueZoomer) {
   appZoomer(value);
   return value;
 }
+var scrolPosition;
 // функция фильтра
-function radioEffect(effet) {
+function radioEffect(effet, scrollValue) {
   var picture = document.querySelector('.img-upload__preview img');
+  var effectValue = document.querySelector('.effect-level__value').value;
   if (effet === 'effect-chrome') {
     picture.className = ('');
     picture.classList.add('effects__preview--chrome');
@@ -179,6 +179,7 @@ function radioEffect(effet) {
   if (effet === 'effect-marvin') {
     picture.className = ('');
     picture.classList.add('effects__preview--marvin');
+    picture.style = 'filter: invert(' + scrollValue + '%)';
   }
   if (effet === 'effect-phobos') {
     picture.className = ('');
@@ -191,6 +192,7 @@ function radioEffect(effet) {
   if (effet === 'effect-none') {
     picture.className = ('');
   }
+  console.log(effectValue);
 }
 // загрузка фотографии
 function upLoadPhoto(evt) {
@@ -215,6 +217,7 @@ function upLoadPhoto(evt) {
       zoomer(valueZoomer);
     });
   }
+
   // скролл фильтра
   scrollInput.addEventListener('mousedown', function (evtevt) {
     evt.preventDefault();
@@ -225,7 +228,7 @@ function upLoadPhoto(evt) {
       moveEvt.preventDefault();
       var move = startScroll - moveEvt.clientX;
       startScroll = moveEvt.clientX;
-      var scrolPosition = scrollInput.offsetLeft - move;
+      scrolPosition = scrollInput.offsetLeft - move;
       if (scrolPosition < 0) {
         scrolPosition = 0;
       }
@@ -235,7 +238,9 @@ function upLoadPhoto(evt) {
       var depth = document.querySelector('.effect-level__depth');
       scrollInput.style.left = scrolPosition + 'px';
       depth.style.width = scrolPosition + 'px';
-      scrollInputValue.value = scrolPosition;
+      scrolPosition = scrolPosition * 100 / 450;
+      scrollInput.value = scrolPosition;
+      console.log(scrolPosition);
     }
     function scrollUp(upEvt) {
       upEvt.preventDefault();
@@ -246,7 +251,7 @@ function upLoadPhoto(evt) {
   });
   // применение фильтра
   if (evt.target.classList.contains('effects__radio')) {
-    radioEffect(evt.target.id);
+    radioEffect(evt.target.id, scrolPosition);
   }
 
   if (evt.target.classList.contains('text__hashtags')) {
