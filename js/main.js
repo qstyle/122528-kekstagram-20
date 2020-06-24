@@ -172,36 +172,6 @@ function upLoadPhoto(evt) {
   var zoomControllBigger = document.querySelector('.scale__control--bigger');
   var startScroll;
   var effectLevel = document.querySelector('.img-upload__effect-level');
-  var scrolPosition;
-
-  function radioEffect(effet) {
-    var picture = document.querySelector('.img-upload__preview img');
-    var effectValue = document.querySelector('.effect-level__value').value;
-    if (effet === 'effect-chrome') {
-      picture.className = ('');
-      picture.classList.add('effects__preview--chrome');
-    }
-    if (effet === 'effect-sepia') {
-      picture.className = ('');
-      picture.classList.add('effects__preview--sepia');
-    }
-    if (effet === 'effect-marvin') {
-      picture.className = ('');
-      picture.classList.add('effects__preview--marvin');
-      picture.style = 'filter: invert(' + scrolPosition + '%)';
-    }
-    if (effet === 'effect-phobos') {
-      picture.className = ('');
-      picture.classList.add('effects__preview--phobos');
-    }
-    if (effet === 'effect-heat') {
-      picture.className = ('');
-      picture.classList.add('effects__preview--heat');
-    }
-    if (effet === 'effect-none') {
-      picture.className = ('');
-    }
-  }
 
 
   if (evt.target.id === 'upload-file') {
@@ -233,20 +203,19 @@ function upLoadPhoto(evt) {
     moveEvt.preventDefault();
     var move = startScroll - moveEvt.clientX;
     startScroll = moveEvt.clientX;
-    scrolPosition = scrollInput.offsetLeft - move;
-    if (scrolPosition < 0) {
-      scrolPosition = 0;
+    var scrollPosition = scrollInput.offsetLeft - move;
+    if (scrollPosition < 0) {
+      scrollPosition = 0;
     }
-    if (scrolPosition > 450) {
-      scrolPosition = 450;
+    if (scrollPosition > 450) {
+      scrollPosition = 450;
     }
     var depth = document.querySelector('.effect-level__depth');
-    scrollInput.style.left = scrolPosition + 'px';
-    depth.style.width = scrolPosition + 'px';
-    scrolPosition = scrolPosition * 100 / 450;
-    scrollInput.value = scrolPosition;
-    console.log(scrolPosition);
-    return scrolPosition;
+    scrollInput.style.left = scrollPosition + 'px';
+    depth.style.width = scrollPosition + 'px';
+    scrollPosition = scrollPosition * 100 / 450;
+    scrollInput.value = scrollPosition;
+    return scrollPosition;
   }
 
   function scrollUp(upEvt) {
@@ -257,7 +226,32 @@ function upLoadPhoto(evt) {
 
   // применение фильтра
   if (evt.target.classList.contains('effects__radio')) {
-    radioEffect(evt.target.id);
+    var picture = document.querySelector('.img-upload__preview img');
+    var effect = evt.target.id;
+    if (effect === 'effect-chrome') {
+      picture.className = ('');
+      picture.classList.add('effects__preview--chrome');
+    }
+    if (effect === 'effect-sepia') {
+      picture.className = ('');
+      picture.classList.add('effects__preview--sepia');
+    }
+    if (effect === 'effect-marvin') {
+      picture.className = ('');
+      picture.classList.add('effects__preview--marvin');
+      picture.style = 'filter: invert(' + scrollMove + '%)';
+    }
+    if (effect === 'effect-phobos') {
+      picture.className = ('');
+      picture.classList.add('effects__preview--phobos');
+    }
+    if (effect === 'effect-heat') {
+      picture.className = ('');
+      picture.classList.add('effects__preview--heat');
+    }
+    if (effect === 'effect-none') {
+      picture.className = ('');
+    }
   }
 
   if (evt.target.classList.contains('text__hashtags')) {
