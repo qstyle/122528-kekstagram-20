@@ -100,6 +100,7 @@ function generateCommentBigPicture(arrayComment) {
 }
 
 // отрисовка развернутой картинки
+// eslint-disable-next-line no-unused-vars
 function openBigPicture(photoObject) {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
