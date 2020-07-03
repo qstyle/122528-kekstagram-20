@@ -151,14 +151,13 @@ function validiteHashtag(hashtags) {
   return validStatus;
 }
 // увеличение и уменьшение картинки в редакторе
-
+var picture = document.querySelector('.img-upload__preview img');
 function appZoomer(value) {
   document.querySelector('.scale__control--value').value = value + '%';
   picture.style = 'transform: scale(' + value / 100 + ')';
 }
-
+var value = parseFloat(document.querySelector('.scale__control--value').value);
 function zoomerPhoto(valueZoomer) {
-  var value = parseFloat(document.querySelector('.scale__control--value').value);
   value = value + valueZoomer * 25;
   if (value >= 100) {
     value = 100;
@@ -176,7 +175,7 @@ var effectLevel = document.querySelector('.img-upload__effect-level');
 var scrollInput = document.querySelector('.effect-level__pin');
 var upLoadModal = document.querySelector('.img-upload__overlay');
 var buttonClose = document.querySelector('.img-upload__cancel');
-var picture = document.querySelector('.img-upload__preview img');
+
 var inputWidth;
 var body = document.querySelector('body');
 function pressMouse(evtevt) {
@@ -194,15 +193,22 @@ function scrollUp(upEvt) {
   effectLevel.removeEventListener('mouseup', scrollUp);
 }
 
+var effect;
+var inputArea = document.querySelector('.text__hashtags');
+
 function closeModal() {
   upLoadModal.classList.add('hidden');
   scrollInput.removeEventListener('mousedown', undefined);
   buttonClose.removeEventListener('click', closeModal);
   body.classList.remove('modal-open');
+  picture.className = 'effects__preview--none';
+  picture.style = '';
+  inputArea.setCustomValidity('');
+  value = '100%';
 }
 
 // загрузка фотографии
-var effect;
+
 function upLoadPhoto(evt) {
   var zoomContorlSmiller = document.querySelector('.scale__control--smaller');
   var zoomControllBigger = document.querySelector('.scale__control--bigger');
@@ -228,40 +234,41 @@ function upLoadPhoto(evt) {
 
   // валидация хэщтэга
   if (evt.target.classList.contains('text__hashtags')) {
-    var hashtags = document.querySelector('.text__hashtags').value;
+    var hashtags = evt.target.value;
     var hashtagArray = hashtags.split(' ');
     var inputArea = document.querySelector('.text__hashtags');
     if ((hashtagArray.length === 1 && hashtagArray[0] === '')) {
       inputArea.setCustomValidity('');
     } else {
       var hashtagValidity = validiteHashtag(hashtagArray);
-      if (hashtagValidity === 0) {
-        inputArea.style = 'background-color: green';
-        inputArea.setCustomValidity('');
-      }
-      if (validiteHashtag(hashtagArray) === 1) {
-        inputArea.style = 'background-color: white';
-        inputArea.setCustomValidity('строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
-      }
-      if (validiteHashtag(hashtagArray) === 2) {
-        inputArea.style = 'background-color: white';
-        inputArea.setCustomValidity('хеш-тег не может состоять только из одной решётки, максимальная длина одного хэш-тега 20 символов, включая решётку');
-      }
-      if (validiteHashtag(hashtagArray) === 3) {
-        inputArea.style = 'background-color: white';
-        inputArea.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
-      }
-      if (validiteHashtag(hashtagArray) === 4) {
-        inputArea.style = 'background-color: white';
-        inputArea.setCustomValidity('нельзя указать больше пяти хэш-тегов');
+      switch (hashtagValidity) {
+        case 0:
+          inputArea.setCustomValidity('');
+          break;
+        case 1:
+          inputArea.style = 'background-color: white';
+          inputArea.setCustomValidity('строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
+          break;
+        case 2:
+          inputArea.style = 'background-color: white';
+          inputArea.setCustomValidity('хеш-тег не может состоять только из одной решётки, максимальная длина одного хэш-тега 20 символов, включая решётку');
+          break;
+        case 3:
+          inputArea.style = 'background-color: white';
+          inputArea.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
+          break;
+        case 4:
+          inputArea.style = 'background-color: white';
+          inputArea.setCustomValidity('нельзя указать больше пяти хэш-тегов');
+          break;
       }
     }
   }
 }
 
 // возвращение слайдера
+var depth = document.querySelector('.effect-level__depth');
 function resetSlider() {
-  var depth = document.querySelector('.effect-level__depth');
   scrollInput.style = 'left:' + inputWidth + '';
   depth.style = 'width:' + inputWidth + '';
 }
@@ -269,21 +276,18 @@ function resetSlider() {
 function applyEffect(scrolMove) {
   picture.className = ('');
   effectLevel.classList.remove('hidden');
+  picture.classList.add('effects__preview--' + effect);
   switch (effect) {
     case 'chrome':
-      picture.classList.add('effects__preview--chrome');
       picture.style = 'filter: grayscale(' + scrolMove / 100 + ')';
       break;
     case 'sepia':
-      picture.classList.add('effects__preview--sepia');
       picture.style = 'filter: sepia(' + scrolMove / 100 + ')';
       break;
     case 'marvin':
-      picture.classList.add('effects__preview--marvin');
       picture.style = 'filter: invert(' + scrolMove + '%)';
       break;
     case 'phobos':
-      picture.classList.add('effects__preview--phobos');
       var phobosLevel = scrolMove * 3 / 100;
       picture.style = 'filter: blur(' + phobosLevel + 'px)';
       break;
@@ -292,7 +296,6 @@ function applyEffect(scrolMove) {
       if (heatLevel < 1) {
         heatLevel = 1;
       }
-      picture.classList.add('effects__preview--heat');
       picture.style = 'filter: brightness(' + heatLevel + ')';
       break;
     case 'none':
@@ -314,7 +317,6 @@ function scrollMove(moveEvt) {
   if (scrollPosition > inputWidth) {
     scrollPosition = inputWidth;
   }
-  var depth = document.querySelector('.effect-level__depth');
   scrollInput.style.left = scrollPosition + 'px';
   depth.style.width = scrollPosition + 'px';
   scrollPosition = scrollPosition * 100 / inputWidth;
