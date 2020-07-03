@@ -175,7 +175,6 @@ var effectLevel = document.querySelector('.img-upload__effect-level');
 var scrollInput = document.querySelector('.effect-level__pin');
 var upLoadModal = document.querySelector('.img-upload__overlay');
 var buttonClose = document.querySelector('.img-upload__cancel');
-
 var inputWidth;
 var body = document.querySelector('body');
 function pressMouse(evtevt) {
@@ -195,23 +194,25 @@ function scrollUp(upEvt) {
 
 var effect;
 var inputArea = document.querySelector('.text__hashtags');
+var zoomContorlSmiller = document.querySelector('.scale__control--smaller');
+var zoomControllBigger = document.querySelector('.scale__control--bigger');
 
 function closeModal() {
   upLoadModal.classList.add('hidden');
   scrollInput.removeEventListener('mousedown', undefined);
-  buttonClose.removeEventListener('click', closeModal);
   body.classList.remove('modal-open');
   picture.className = 'effects__preview--none';
   picture.style = '';
   inputArea.setCustomValidity('');
-  value = '100%';
+  resetSlider();
+  effectLevel.classList.add('hidden');
+  zoomContorlSmiller.removeEventListener('click', undefined);
+  zoomControllBigger.addEventListener('click', undefined);
+  buttonClose.removeEventListener('click', closeModal);
 }
 
 // загрузка фотографии
-
 function upLoadPhoto(evt) {
-  var zoomContorlSmiller = document.querySelector('.scale__control--smaller');
-  var zoomControllBigger = document.querySelector('.scale__control--bigger');
   if (evt.target.id === 'upload-file') {
     scrollInput.addEventListener('mousedown', pressMouse);
     buttonClose.addEventListener('click', closeModal);
@@ -234,9 +235,8 @@ function upLoadPhoto(evt) {
 
   // валидация хэщтэга
   if (evt.target.classList.contains('text__hashtags')) {
-    var hashtags = evt.target.value;
+    var hashtags = inputArea.value;
     var hashtagArray = hashtags.split(' ');
-    var inputArea = document.querySelector('.text__hashtags');
     if ((hashtagArray.length === 1 && hashtagArray[0] === '')) {
       inputArea.setCustomValidity('');
     } else {
