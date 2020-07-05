@@ -49,10 +49,10 @@ function generateComments() {
   }
   return comments;
 }
-
+var photosArray = [];
 // гернерация фото
 function generateBlockPhoto(numberOfCopies) {
-  var photosArray = [];
+
   for (var i = 0; i < numberOfCopies; i++) {
     var blockPhotoObj = {
       url: 'photos/' + (i + 1) + '.jpg',
@@ -64,6 +64,7 @@ function generateBlockPhoto(numberOfCopies) {
   }
   return photosArray;
 }
+
 var blockPhoto = generateBlockPhoto(25);
 
 // создание блока фото
@@ -123,13 +124,25 @@ function openBigPicture(photoObject) {
 }
 
 
+function clickBigPhoto(evt) {
+  evt.preventDefault();
+  var picturesSrc = (evt.currentTarget.src).split('/');
+  var picturesSrcNum = parseInt(picturesSrc[picturesSrc.length - 1], 10);
+  openBigPicture(photosArray[picturesSrcNum - 1]);
+
+}
+var photoLink = document.querySelectorAll('.picture img');
+for (var i = 0; i < photoLink.length; i++) {
+  photoLink[i].addEventListener('click', clickBigPhoto);
+}
+
 // валидация хэщтэга
 function validiteHashtag(hashtags) {
   for (var y = 0; y < hashtags.length; y++) {
     hashtags[y] = hashtags[y].toLowerCase();
   }
   var re = /^#[a-zA-ZА-Яа-я0-9]*$/;
-  for (var i = 0; i < hashtags.length; i++) {
+  for (i = 0; i < hashtags.length; i++) {
     var validStatus = 0;
     if (!re.test(hashtags[i])) {
       validStatus = 1;
@@ -206,9 +219,16 @@ function closeModal() {
   inputArea.setCustomValidity('');
   resetSlider();
   effectLevel.classList.add('hidden');
-  zoomContorlSmiller.removeEventListener('click', undefined);
-  zoomControllBigger.addEventListener('click', undefined);
+  zoomContorlSmiller.removeEventListener('click', zoomSmiller);
+  zoomControllBigger.removeEventListener('click', zoomBigger);
   buttonClose.removeEventListener('click', closeModal);
+}
+
+function zoomSmiller() {
+  zoomerPhoto(-1);
+}
+function zoomBigger() {
+  zoomerPhoto(1);
 }
 
 // загрузка фотографии
@@ -218,12 +238,8 @@ function upLoadPhoto(evt) {
     buttonClose.addEventListener('click', closeModal);
     upLoadModal.classList.remove('hidden');
     body.classList.add('modal-open');
-    zoomContorlSmiller.addEventListener('click', function zoomSmiller() {
-      zoomerPhoto(-1);
-    });
-    zoomControllBigger.addEventListener('click', function zoomBigger() {
-      zoomerPhoto(1);
-    });
+    zoomContorlSmiller.addEventListener('click', zoomSmiller);
+    zoomControllBigger.addEventListener('click', zoomBigger);
   }
 
   // применение фильтра
