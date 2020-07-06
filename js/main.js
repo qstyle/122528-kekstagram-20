@@ -102,6 +102,7 @@ function generateCommentBigPicture(arrayComment) {
 // eslint-disable-next-line no-unused-vars
 var body = document.querySelector('body');
 var bigPicture = document.querySelector('.big-picture');
+
 function openBigPicture(photoObject) {
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img');
@@ -123,23 +124,45 @@ function openBigPicture(photoObject) {
   body.classList.add('modal-open');
 }
 
-
-function clickBigPhoto(evt) {
-  evt.preventDefault();
-  var picturesSrc = (evt.currentTarget.src).split('/');
-  var picturesSrcNum = parseInt(picturesSrc[picturesSrc.length - 1], 10);
-  openBigPicture(photosArray[picturesSrcNum - 1]);
+// ищет картинку в массиве по подстроке из url
+function findPicture(pictureSrcNum) {
+  return photosArray.find(function find(photo) {
+    return photo.url.indexOf(pictureSrcNum) >= 0;
+  });
 }
+
+// обработчик клика по превью картинки
+var cancelBigPhoto = document.querySelector('#picture-cancel');
+function clickBigPhoto(evt) {
+  cancelBigPhoto.addEventListener('click', cancelPhoto);
+  document.addEventListener('keydown', function esc(evtevt) {
+    if (evtevt.keyCode === 27) {
+      cancelPhoto();
+    }
+  });
+  var picturesSrc = (evt.currentTarget.src).split('/');
+  var picturesSrcNum = picturesSrc[picturesSrc.length - 1];
+  var picture = findPicture(picturesSrcNum);
+  return openBigPicture(picture);
+}
+
 var photoLink = document.querySelectorAll('.picture img');
 for (var i = 0; i < photoLink.length; i++) {
   photoLink[i].addEventListener('click', clickBigPhoto);
 }
-var cancelBigPhoto = document.querySelector('#picture-cancel');
-cancelBigPhoto.addEventListener('click', function cancelPhoto(evt) {
-  evt.preventDefault();
+
+function cancelPhoto() {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
-});
+  cancelBigPhoto.removeEventListener('click', cancelPhoto);
+  document.removeEventListener('keydown', function esc(evtevt) {
+    if (evtevt.keyCode === 27) {
+      cancelPhoto();
+    }
+  });
+}
+
+
 // валидация хэщтэга
 function validiteHashtag(hashtags) {
   for (var y = 0; y < hashtags.length; y++) {
@@ -358,5 +381,3 @@ var upLoadForm = document.querySelector('#upload-select-image');
 upLoadForm.addEventListener('change', function upLoadEvent(evt) {
   upLoadPhoto(evt);
 });
-
-
