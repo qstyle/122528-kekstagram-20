@@ -102,7 +102,6 @@ function generateCommentBigPicture(arrayComment) {
 // eslint-disable-next-line no-unused-vars
 var body = document.querySelector('body');
 var bigPicture = document.querySelector('.big-picture');
-
 function openBigPicture(photoObject) {
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img');
@@ -116,6 +115,9 @@ function openBigPicture(photoObject) {
   bigPictureLikes.textContent = photoObject.likes;
   bigPictureDescription.textContent = photoObject.description;
   bigPictureComentsCount.textContent = photoObject.comments.length;
+  while (bigPictureComents.firstChild) {
+    bigPictureComents.removeChild(bigPictureComents.firstChild);
+  }
   for (var i = 0; i < photoObject.comments.length; i++) {
     bigPictureComents.appendChild(generateCommentBigPicture(photoObject.comments[i]));
   }
@@ -132,21 +134,24 @@ function findPicture(pictureSrcNum) {
 }
 
 // обработчик клика по превью картинки
+function esc(evtevt) {
+  if (evtevt.keyCode === 27) {
+    cancelPhoto();
+  }
+}
 var cancelBigPhoto = document.querySelector('#picture-cancel');
 function clickBigPhoto(evt) {
+  evt.preventDefault();
   cancelBigPhoto.addEventListener('click', cancelPhoto);
-  document.addEventListener('keydown', function esc(evtevt) {
-    if (evtevt.keyCode === 27) {
-      cancelPhoto();
-    }
-  });
-  var picturesSrc = (evt.currentTarget.src).split('/');
+  document.addEventListener('keydown', esc);
+  var picturesSrc = evt.currentTarget.querySelector('img').src.split('/');
   var picturesSrcNum = picturesSrc[picturesSrc.length - 1];
   var picture = findPicture(picturesSrcNum);
   return openBigPicture(picture);
 }
 
-var photoLink = document.querySelectorAll('.picture img');
+
+var photoLink = document.querySelectorAll('.picture');
 for (var i = 0; i < photoLink.length; i++) {
   photoLink[i].addEventListener('click', clickBigPhoto);
 }
@@ -155,13 +160,9 @@ function cancelPhoto() {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   cancelBigPhoto.removeEventListener('click', cancelPhoto);
-  document.removeEventListener('keydown', function esc(evtevt) {
-    if (evtevt.keyCode === 27) {
-      cancelPhoto();
-    }
-  });
-}
+  document.removeEventListener('keydown', esc);
 
+}
 
 // валидация хэщтэга
 function validiteHashtag(hashtags) {
