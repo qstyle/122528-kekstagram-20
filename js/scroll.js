@@ -20,6 +20,7 @@
     window.effectLevel.removeEventListener('mousemove', scrollMove);
     window.effectLevel.removeEventListener('mouseup', scrollUp);
   }
+
   function scrollMove(moveEvt) {
     moveEvt.preventDefault();
     var move = startScroll - moveEvt.clientX;

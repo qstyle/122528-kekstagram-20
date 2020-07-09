@@ -18,7 +18,6 @@
     return messages.join('');
   }
 
-  // генерация коментариев
   function generateComment() {
     var comment = {};
     var AVATAR = [1, 2, 3, 4, 5, 6];
@@ -41,7 +40,7 @@
     return comments;
   }
   var photosArray = [];
-  // гернерация фото
+
   window.generateBlockPhoto = function (numberOfCopies) {
     for (var i = 0; i < numberOfCopies; i++) {
       var blockPhotoObj = {

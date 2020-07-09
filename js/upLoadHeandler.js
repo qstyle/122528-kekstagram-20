@@ -34,7 +34,6 @@
       }
     }
 
-    // валидация хэщтэга
     if (evt.target.classList.contains('text__hashtags')) {
       var hashtags = inputArea.value;
       var hashtagArray = hashtags.split(' ');
@@ -66,6 +65,7 @@
       }
     }
   };
+
   function closeModal() {
     window.upLoadModal.classList.add('hidden');
     window.scrollInput.removeEventListener('mousedown', undefined);
