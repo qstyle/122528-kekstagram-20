@@ -2,6 +2,7 @@
 
 (function () {
   window.picture = document.querySelector('.img-upload__preview img');
+  var zoomerValue = document.querySelector('.scale__control--value');
   function appZoomer(value) {
     document.querySelector('.scale__control--value').value = value + '%';
     window.picture.style = 'transform: scale(' + value / 100 + ')';
@@ -24,5 +25,8 @@
   window.zoomBiggerHandler = function () {
     window.zoomerPhoto(1);
   };
+  window.resetZoomer = function () {
+    document.querySelector('.scale__control--value').value = '100%';
 
+  };
 })();

@@ -20,6 +20,7 @@
       window.effect = evt.target.value;
       window.applyEffect(100);
       window.resetSlider();
+      window.resetZoomer();
     }
     if (evt.target.classList.contains('text__description')) {
       var comment = inputComment.value;
