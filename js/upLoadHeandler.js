@@ -6,6 +6,7 @@
   var zoomContorlSmiller = document.querySelector('.scale__control--smaller');
   var zoomControllBigger = document.querySelector('.scale__control--bigger');
   var inputComment = document.querySelector('.text__description');
+
   window.upLoadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
       window.scrollInput.addEventListener('mousedown', window.pressMouse);
@@ -33,7 +34,6 @@
       }
     }
 
-    // валидация хэщтэга
     if (evt.target.classList.contains('text__hashtags')) {
       var hashtags = inputArea.value;
       var hashtagArray = hashtags.split(' ');
@@ -65,6 +65,7 @@
       }
     }
   };
+
   function closeModal() {
     window.upLoadModal.classList.add('hidden');
     window.scrollInput.removeEventListener('mousedown', undefined);
