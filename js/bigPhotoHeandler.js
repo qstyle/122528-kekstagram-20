@@ -2,7 +2,7 @@
 (function () {
   window.photoLinks = document.querySelectorAll('.picture');
   function findBigPhoto(pictureSrcNum) {
-    return window.blockPhoto.find(function find(photo) {
+    return window.datadata.find(function find(photo) {
       return photo.url.indexOf(pictureSrcNum) >= 0;
     });
   }
@@ -15,13 +15,14 @@
 
   var cancelBigPhoto = document.querySelector('#picture-cancel');
   window.clickBigPhoto = function (evt) {
+    console.log('!');
     evt.preventDefault();
     document.addEventListener('keydown', escHandler);
     cancelBigPhoto.addEventListener('click', cancelPhotoHandler);
     var picturesSrc = evt.currentTarget.querySelector('img').src.split('/');
     var picturesSrcNum = picturesSrc[picturesSrc.length - 1];
     var picture = findBigPhoto(picturesSrcNum);
-    return window.openBigPicture(picture);
+
   };
 
   function cancelPhotoHandler() {
