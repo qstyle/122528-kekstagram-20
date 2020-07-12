@@ -12,6 +12,5 @@
     xhr.responseType = 'json';
     xhr.open('POST', 'https://javascript.pages.academy/kekstagram');
     xhr.send(formValue);
-
   });
 })();
