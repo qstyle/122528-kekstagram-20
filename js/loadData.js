@@ -6,8 +6,8 @@
 
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
-      window.datadata = xhr.response;
-      window.addPhotoPage(window.datadata);
+      window.loadData = xhr.response;
+      window.addPhotoPage(window.loadData);
       window.clickBigPhotoHandler();
     } else {
       // eslint-disable-next-line no-alert
