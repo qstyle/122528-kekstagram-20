@@ -10,9 +10,7 @@
     var formValue = new FormData(form);
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    formValue = xhr.response;
     xhr.open('POST', 'https://javascript.pages.academy/kekstagram');
     xhr.send(formValue);
-
   });
 })();
