@@ -9,6 +9,7 @@
       window.loadData = xhr.response;
       window.addPhotoPage(window.loadData);
       window.clickBigPhotoHandler();
+      window.renderFilterBar();
     } else {
       // eslint-disable-next-line no-alert
       alert('ошибка № ' + xhr.status + '!');

@@ -20,6 +20,8 @@
     return fragment;
   }
   window.addPhotoPage = function (loadData) {
+
     picturesContainer.appendChild(rednerBlockAll(loadData));
+    picturesContainer.removeChild(document.querySelector('.picture'));
   };
 })();
