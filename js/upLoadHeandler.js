@@ -11,6 +11,7 @@
     if (evt.target.id === 'upload-file') {
       window.scrollInput.addEventListener('mousedown', window.pressMouse);
       buttonClose.addEventListener('click', window.closeModal);
+      document.addEventListener('keydown', closeEsc);
       window.upLoadModal.classList.remove('hidden');
       window.body.classList.add('modal-open');
       zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
@@ -79,4 +80,12 @@
     zoomControllBigger.removeEventListener('click', window.zoomBiggerHandler);
     buttonClose.removeEventListener('click', window.closeModal);
   };
+
+  function closeEsc(evtevt) {
+    if (!(inputArea.matches(':focus')) && !(inputComment.matches(':focus'))) {
+      if (evtevt.keyCode === 27) {
+        window.closeModal();
+      }
+    }
+  }
 })();

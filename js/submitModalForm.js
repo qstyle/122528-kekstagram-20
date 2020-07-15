@@ -1,8 +1,10 @@
 'use strict';
+
 (function () {
   var main = document.querySelector('main');
-  var successModal = (document.querySelector('#success').content).cloneNode(true);
+
   window.successForm = function () {
+    var successModal = (document.querySelector('#success').content).cloneNode(true);
     main.appendChild(successModal);
     document.addEventListener('click', closeSuccessForm);
     document.addEventListener('keydown', closeSuccess);
