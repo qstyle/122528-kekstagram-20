@@ -11,7 +11,6 @@
     return photoElementClone;
   };
 
-  // рендер всех блоков
   function rednerBlockAll(loadData) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < loadData.length; i++) {
@@ -19,9 +18,18 @@
     }
     return fragment;
   }
-  window.addPhotoPage = function (loadData) {
-
+  window.addPhotoPage = function (loadData, clearPhoto) {
+    if (clearPhoto) {
+      clearPhotos();
+    }
     picturesContainer.appendChild(rednerBlockAll(loadData));
-    picturesContainer.removeChild(document.querySelector('.picture'));
+    window.clickBigPhotoHandler();
   };
+
+  function clearPhotos() {
+    for (var i = 0; i < window.photoLinks.length; i++) {
+      window.photoLinks[i].removeEventListener('click', window.clickBigPhoto);
+      picturesContainer.removeChild(window.photoLinks[i]);
+    }
+  }
 })();

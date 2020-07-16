@@ -30,9 +30,9 @@
     document.removeEventListener('keydown', escHandler);
   }
   window.clickBigPhotoHandler = function () {
-    var photoLinks = document.querySelectorAll('.picture');
-    for (var i = 0; i < photoLinks.length; i++) {
-      photoLinks[i].addEventListener('click', window.clickBigPhoto);
+    window.photoLinks = document.querySelectorAll('.picture');
+    for (var i = 0; i < window.photoLinks.length; i++) {
+      window.photoLinks[i].addEventListener('click', window.clickBigPhoto);
     }
   };
 })();
