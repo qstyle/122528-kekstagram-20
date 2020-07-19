@@ -36,23 +36,24 @@
 
 
   function filterHandler(evt) {
-    if (evt.target.id === buttonFilterDefault.id) {
-      window.addPhotoPage(window.loadData, 1);
-      buttonFilterDefault.classList.add('img-filters__button--active');
-      buttonFilterRandom.classList.remove('img-filters__button--active');
-      buttonFilterDiscussed.classList.remove('img-filters__button--active');
+    switch (evt.target.id) {
+      case buttonFilterDefault.id:
+        window.addPhotoPage(window.loadData, 1);
+        break;
+      case buttonFilterRandom.id:
+        generateRandomFilter();
+        break;
+      case buttonFilterDiscussed.id:
+        generateDiscussedFilter();
+        break;
     }
-    if (evt.target.id === buttonFilterRandom.id) {
-      generateRandomFilter();
-      buttonFilterDefault.classList.remove('img-filters__button--active');
-      buttonFilterRandom.classList.add('img-filters__button--active');
-      buttonFilterDiscussed.classList.remove('img-filters__button--active');
-    }
-    if (evt.target.id === buttonFilterDiscussed.id) {
-      generateDiscussedFilter();
-      buttonFilterDefault.classList.remove('img-filters__button--active');
-      buttonFilterRandom.classList.remove('img-filters__button--active');
-      buttonFilterDiscussed.classList.add('img-filters__button--active');
+
+    for (var k = 0; k < buttonFilter.length; k++) {
+      if (evt.target.id === buttonFilter[k].id) {
+        buttonFilter[k].classList.add('img-filters__button--active');
+      } else {
+        buttonFilter[k].classList.remove('img-filters__button--active');
+      }
     }
   }
 
