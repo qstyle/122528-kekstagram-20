@@ -11,35 +11,42 @@
     var bigPictureComentsCount = document.querySelector('.comments-count');
     var bigPictureComents = document.querySelector('.social__comments');
     var bigSocalPictureComents = document.querySelector('.social__comment-count');
-    var bigPictureComentsLoader = document.querySelector('.comments-loader');
+    window.bigPictureComentsLoader = document.querySelector('.comments-loader');
     bigPictureImg.src = photoObject.url;
     bigPictureLikes.textContent = photoObject.likes;
     bigPictureDescription.textContent = photoObject.description;
     bigPictureComentsCount.textContent = photoObject.comments.length;
     bigPictureComents.innerHTML = '';
-
+    window.resetCommentArray = function () {
+      groupCommentsArray.splice(0, groupCommentsArray.length);
+      groupCommentsArray = photoObject.comments.slice();
+    };
+    var groupCommentsArray = photoObject.comments.slice();
     window.renderGroupComments = function () {
-      var groupCommentsArray = photoObject.comments;
-      if (groupCommentsArray.length >= 5) {
-        bigPictureComentsLoader.classList.remove('hidden');
-        for (var i = 0; i < 5; i++) {
-          bigPictureComents.appendChild(window.generateCommentBigPicture(groupCommentsArray[0]));
-          groupCommentsArray.splice(0, 1);
-        }
-      }
       if (groupCommentsArray.length < 5) {
-        for (var y = 0; y < groupCommentsArray.length; y++) {
-          bigPictureComents.appendChild(window.generateCommentBigPicture(groupCommentsArray[0]));
-          groupCommentsArray.splice(0, 1);
-        }
-      } if (groupCommentsArray.length === 0) {
-        bigPictureComentsLoader.classList.add('hidden');
-        groupCommentsArray = photoObject.comments;
+        window.bigPictureComentsLoader.classList.add('hidden');
+        var groupComments = groupCommentsArray.splice(0, 5);
+        groupComments.forEach(function (groupComment) {
+          bigPictureComents.appendChild(window.generateCommentBigPicture(groupComment));
+        });
+
       }
+      if (groupCommentsArray.length >= 5) {
+        window.bigPictureComentsLoader.classList.remove('hidden');
+        groupComments = groupCommentsArray.splice(0, 5);
+        groupComments.forEach(function (groupComment) {
+          bigPictureComents.appendChild(window.generateCommentBigPicture(groupComment));
+        });
+      } if (groupCommentsArray.length === 0) {
+        window.bigPictureComentsLoader.classList.add('hidden');
+        groupCommentsArray = photoObject.comments.slice();
+
+      }
+
     };
 
     window.renderGroupComments();
-    bigPictureComentsLoader.addEventListener('click', window.renderGroupComments);
+    window.bigPictureComentsLoader.addEventListener('click', window.renderGroupComments);
     bigSocalPictureComents.classList.add('hidden');
     window.body.classList.add('modal-open');
   };

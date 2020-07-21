@@ -77,7 +77,6 @@
     window.picture.style = '';
     inputArea.setCustomValidity('');
     document.querySelector('#upload-select-image').reset();
-
     window.resetSlider();
     window.effectLevel.classList.add('hidden');
     zoomContorlSmiller.removeEventListener('click', window.zoomSmillerHandler);
