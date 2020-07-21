@@ -17,11 +17,31 @@
     bigPictureDescription.textContent = photoObject.description;
     bigPictureComentsCount.textContent = photoObject.comments.length;
     bigPictureComents.innerHTML = '';
-    for (var i = 0; i < photoObject.comments.length; i++) {
-      bigPictureComents.appendChild(window.generateCommentBigPicture(photoObject.comments[i]));
-    }
+
+    window.renderGroupComments = function () {
+      var groupCommentsArray = photoObject.comments;
+      if (groupCommentsArray.length >= 5) {
+        bigPictureComentsLoader.classList.remove('hidden');
+        for (var i = 0; i < 5; i++) {
+          bigPictureComents.appendChild(window.generateCommentBigPicture(groupCommentsArray[0]));
+          groupCommentsArray.splice(0, 1);
+        }
+      }
+      if (groupCommentsArray.length < 5) {
+        for (var y = 0; y < groupCommentsArray.length; y++) {
+          bigPictureComents.appendChild(window.generateCommentBigPicture(groupCommentsArray[0]));
+          groupCommentsArray.splice(0, 1);
+        }
+      } if (groupCommentsArray.length === 0) {
+        bigPictureComentsLoader.classList.add('hidden');
+        groupCommentsArray = photoObject.comments;
+      }
+    };
+
+    window.renderGroupComments();
+    bigPictureComentsLoader.addEventListener('click', window.renderGroupComments);
     bigSocalPictureComents.classList.add('hidden');
-    bigPictureComentsLoader.classList.add('hidden');
     window.body.classList.add('modal-open');
   };
+
 })();
