@@ -9,6 +9,7 @@
 
   window.upLoadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
+
       window.scrollInput.addEventListener('mousedown', window.pressMouse);
       buttonClose.addEventListener('click', window.closeModal);
       document.addEventListener('keydown', closeEsc);
@@ -16,6 +17,7 @@
       window.body.classList.add('modal-open');
       zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
       zoomControllBigger.addEventListener('click', window.zoomBiggerHandler);
+      window.upLoadPhotoPreview();
     }
 
     if (evt.target.classList.contains('effects__radio')) {
