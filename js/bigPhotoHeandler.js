@@ -1,8 +1,7 @@
 'use strict';
 (function () {
-  window.photoLinks = document.querySelectorAll('.picture');
   function findBigPhoto(pictureSrcNum) {
-    return window.blockPhoto.find(function find(photo) {
+    return window.loadData.find(function find(photo) {
       return photo.url.indexOf(pictureSrcNum) >= 0;
     });
   }
@@ -21,7 +20,7 @@
     var picturesSrc = evt.currentTarget.querySelector('img').src.split('/');
     var picturesSrcNum = picturesSrc[picturesSrc.length - 1];
     var picture = findBigPhoto(picturesSrcNum);
-    return window.openBigPicture(picture);
+    window.openBigPicture(picture);
   };
 
   function cancelPhotoHandler() {
@@ -30,4 +29,10 @@
     cancelBigPhoto.removeEventListener('click', cancelPhotoHandler);
     document.removeEventListener('keydown', escHandler);
   }
+  window.clickBigPhotoHandler = function () {
+    window.photoLinks = document.querySelectorAll('.picture');
+    for (var i = 0; i < window.photoLinks.length; i++) {
+      window.photoLinks[i].addEventListener('click', window.clickBigPhoto);
+    }
+  };
 })();

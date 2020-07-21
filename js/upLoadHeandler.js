@@ -10,7 +10,8 @@
   window.upLoadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
       window.scrollInput.addEventListener('mousedown', window.pressMouse);
-      buttonClose.addEventListener('click', closeModal);
+      buttonClose.addEventListener('click', window.closeModal);
+      document.addEventListener('keydown', closeEsc);
       window.upLoadModal.classList.remove('hidden');
       window.body.classList.add('modal-open');
       zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
@@ -66,17 +67,27 @@
     }
   };
 
-  function closeModal() {
+  window.closeModal = function () {
     window.upLoadModal.classList.add('hidden');
     window.scrollInput.removeEventListener('mousedown', undefined);
     window.body.classList.remove('modal-open');
     window.picture.className = 'effects__preview--none';
     window.picture.style = '';
     inputArea.setCustomValidity('');
+    document.querySelector('#upload-select-image').reset();
+
     window.resetSlider();
     window.effectLevel.classList.add('hidden');
     zoomContorlSmiller.removeEventListener('click', window.zoomSmillerHandler);
     zoomControllBigger.removeEventListener('click', window.zoomBiggerHandler);
-    buttonClose.removeEventListener('click', closeModal);
+    buttonClose.removeEventListener('click', window.closeModal);
+  };
+
+  function closeEsc(evtevt) {
+    if (!(inputArea.matches(':focus')) && !(inputComment.matches(':focus'))) {
+      if (evtevt.keyCode === 27) {
+        window.closeModal();
+      }
+    }
   }
 })();

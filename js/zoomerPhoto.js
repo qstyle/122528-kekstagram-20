@@ -6,6 +6,7 @@
     document.querySelector('.scale__control--value').value = value + '%';
     window.picture.style = 'transform: scale(' + value / 100 + ')';
   }
+
   var value = parseFloat(document.querySelector('.scale__control--value').value);
   window.zoomerPhoto = function (valueZoomer) {
     value = value + valueZoomer * 25;
