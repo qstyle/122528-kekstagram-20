@@ -28,7 +28,7 @@
 
   function clearPhotos() {
     for (var i = 0; i < window.photoLinks.length; i++) {
-      window.photoLinks[i].removeEventListener('click', window.clickBigPhoto);
+      window.photoLinks[i].removeEventListener('click', window.clickBigPhotosHandler);
       picturesContainer.removeChild(window.photoLinks[i]);
     }
   }

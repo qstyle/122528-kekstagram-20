@@ -11,9 +11,9 @@
   window.upLoadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
 
-      window.scrollInput.addEventListener('mousedown', window.pressMouse);
-      buttonClose.addEventListener('click', window.closeModal);
-      document.addEventListener('keydown', closeEsc);
+      window.scrollInput.addEventListener('mousedown', window.pressMouseHandler);
+      buttonClose.addEventListener('click', window.closeModalHandler);
+      document.addEventListener('keydown', closeEscHandler);
       window.upLoadModal.classList.remove('hidden');
       window.body.classList.add('modal-open');
       zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
@@ -73,7 +73,7 @@
     }
   };
 
-  window.closeModal = function () {
+  window.closeModalHandler = function () {
     window.upLoadModal.classList.add('hidden');
     window.scrollInput.removeEventListener('mousedown', undefined);
     window.body.classList.remove('modal-open');
@@ -85,13 +85,13 @@
     window.effectLevel.classList.add('hidden');
     zoomContorlSmiller.removeEventListener('click', window.zoomSmillerHandler);
     zoomControllBigger.removeEventListener('click', window.zoomBiggerHandler);
-    buttonClose.removeEventListener('click', window.closeModal);
+    buttonClose.removeEventListener('click', window.closeModalHandler);
   };
 
-  function closeEsc(evtevt) {
+  function closeEscHandler(evtevt) {
     if (!(inputArea.matches(':focus')) && !(inputComment.matches(':focus'))) {
       if (evtevt.keyCode === 27) {
-        window.closeModal();
+        window.closeModalHandler();
       }
     }
   }

@@ -6,22 +6,22 @@
   window.upLoadModal = document.querySelector('.img-upload__overlay');
 
   var inputWidth;
-  window.pressMouse = function (evtevt) {
+  window.pressMouseHandler = function (evtevt) {
     evtevt.preventDefault();
     startScroll = evtevt.clientX;
-    window.effectLevel.addEventListener('mousemove', scrollMove);
-    window.effectLevel.addEventListener('mouseup', scrollUp);
-    window.effectLevel.addEventListener('mouseleave', scrollUp);
+    window.effectLevel.addEventListener('mousemove', scrollMoveHandler);
+    window.effectLevel.addEventListener('mouseup', scrollUpHandler);
+    window.effectLevel.addEventListener('mouseleave', scrollUpHandler);
     return startScroll;
   };
 
-  function scrollUp(upEvt) {
+  function scrollUpHandler(upEvt) {
     upEvt.preventDefault();
-    window.effectLevel.removeEventListener('mousemove', scrollMove);
-    window.effectLevel.removeEventListener('mouseup', scrollUp);
+    window.effectLevel.removeEventListener('mousemove', scrollMoveHandler);
+    window.effectLevel.removeEventListener('mouseup', scrollUpHandler);
   }
 
-  function scrollMove(moveEvt) {
+  function scrollMoveHandler(moveEvt) {
     moveEvt.preventDefault();
     var move = startScroll - moveEvt.clientX;
     inputWidth = document.querySelector('.effect-level__line').offsetWidth;

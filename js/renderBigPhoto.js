@@ -24,7 +24,7 @@
       groupCommentsArray = photoObject.comments.slice();
     };
 
-    window.renderGroupComments = function () {
+    window.renderGroupCommentsHandler = function () {
       var fragment = document.createDocumentFragment();
       window.bigPictureComentsLoader.classList.remove('hidden');
       var groupComments = groupCommentsArray.splice(0, 5);
@@ -37,8 +37,8 @@
       }
     };
 
-    window.renderGroupComments();
-    window.bigPictureComentsLoader.addEventListener('click', window.renderGroupComments);
+    window.renderGroupCommentsHandler();
+    window.bigPictureComentsLoader.addEventListener('click', window.renderGroupCommentsHandler);
     bigSocalPictureComents.classList.add('hidden');
     window.body.classList.add('modal-open');
   };
