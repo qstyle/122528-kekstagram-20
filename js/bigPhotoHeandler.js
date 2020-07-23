@@ -21,11 +21,14 @@
     var picturesSrcNum = picturesSrc[picturesSrc.length - 1];
     var picture = findBigPhoto(picturesSrcNum);
     window.openBigPicture(picture);
+
   };
 
   function cancelPhotoHandler() {
     window.bigPicture.classList.add('hidden');
     window.body.classList.remove('modal-open');
+    window.resetCommentArray();
+    window.bigPictureComentsLoader.removeEventListener('click', window.renderGroupComments);
     cancelBigPhoto.removeEventListener('click', cancelPhotoHandler);
     document.removeEventListener('keydown', escHandler);
   }

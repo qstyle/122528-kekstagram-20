@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  window.generateCommentBigPicture = function generateCommentBigPicture(arrayComment) {
+  window.generateCommentBigPicture = function (arrayComment) {
     var elementCommentBigPicture = document.querySelector('#big_picture').content;
     var bigPictureClone = elementCommentBigPicture.cloneNode(true);
     bigPictureClone.querySelector('.social__picture').src = arrayComment.avatar;
