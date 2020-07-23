@@ -60,7 +60,7 @@
   function generateRandomFilter() {
     var randomPhotoArraysIndex = [];
     for (var j = 0; randomPhotoArraysIndex.length < 10; j++) {
-      var randomPhotoIndex = window.generateRandom(0, window.loadData.length);
+      var randomPhotoIndex = window.generateRandom(0, window.loadData.length - 1);
       if (!(randomPhotoArraysIndex.includes(randomPhotoIndex))) {
         randomPhotoArraysIndex.push(randomPhotoIndex);
       }
