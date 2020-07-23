@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var buttonClose = document.querySelector('.img-upload__cancel');
   var inputArea = document.querySelector('.text__hashtags');
   var zoomContorlSmiller = document.querySelector('.scale__control--smaller');
@@ -33,6 +34,9 @@
       } else {
         if (comment.length > 140) {
           inputComment.setCustomValidity('длина комментария не может составлять больше 140 символов');
+        }
+        if (comment.length <= 140) {
+          inputComment.setCustomValidity('');
         }
       }
     }
@@ -91,7 +95,7 @@
       }
     }
   }
-  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
   var fileChooser = document.querySelector('#upload-file');
   window.upLoadPhotoPreview = function () {
     var file = fileChooser.files[0];
