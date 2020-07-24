@@ -11,8 +11,7 @@
       window.clickBigPhotoHandler();
       window.renderFilterBar();
     } else {
-      // eslint-disable-next-line no-alert
-      alert('ошибка № ' + xhr.status + '!');
+      throw Error('ошибка N' + xhr.status);
     }
   });
   xhr.open('GET', 'https://javascript.pages.academy/kekstagram/data');
