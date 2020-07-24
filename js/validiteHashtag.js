@@ -19,10 +19,9 @@
       } else if (hashtags.length > 5) {
         validStatus = 4;
         return validStatus;
-      } else {
-        validStatus = 0;
-        return validStatus;
       }
+      validStatus = 0;
+      return validStatus;
     }
     return validStatus;
   };

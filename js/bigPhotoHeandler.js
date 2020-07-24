@@ -13,7 +13,7 @@
   }
 
   var cancelBigPhoto = document.querySelector('#picture-cancel');
-  window.clickBigPhoto = function (evt) {
+  window.clickBigPhotosHandler = function (evt) {
     evt.preventDefault();
     document.addEventListener('keydown', escHandler);
     cancelBigPhoto.addEventListener('click', cancelPhotoHandler);
@@ -28,14 +28,14 @@
     window.bigPicture.classList.add('hidden');
     window.body.classList.remove('modal-open');
     window.resetCommentArray();
-    window.bigPictureComentsLoader.removeEventListener('click', window.renderGroupComments);
+    window.bigPictureComentsLoader.removeEventListener('click', window.renderGroupCommentsHandler);
     cancelBigPhoto.removeEventListener('click', cancelPhotoHandler);
     document.removeEventListener('keydown', escHandler);
   }
   window.clickBigPhotoHandler = function () {
     window.photoLinks = document.querySelectorAll('.picture');
     for (var i = 0; i < window.photoLinks.length; i++) {
-      window.photoLinks[i].addEventListener('click', window.clickBigPhoto);
+      window.photoLinks[i].addEventListener('click', window.clickBigPhotosHandler);
     }
   };
 })();

@@ -9,12 +9,12 @@
     xhr.responseType = 'json';
     xhr.open('POST', 'https://javascript.pages.academy/kekstagram');
     xhr.send(formValue);
-    xhr.addEventListener('load', function submitForm() {
+    xhr.addEventListener('load', function submitFormHandler() {
       if (xhr.status === 200) {
-        window.closeModal();
+        window.closeModalHandler();
         window.successForm();
       } else {
-        window.closeModal();
+        window.closeModalHandler();
         window.errorForm();
       }
     });

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var buttonClose = document.querySelector('.img-upload__cancel');
   var inputArea = document.querySelector('.text__hashtags');
   var zoomContorlSmiller = document.querySelector('.scale__control--smaller');
@@ -10,9 +11,9 @@
   window.upLoadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
 
-      window.scrollInput.addEventListener('mousedown', window.pressMouse);
-      buttonClose.addEventListener('click', window.closeModal);
-      document.addEventListener('keydown', closeEsc);
+      window.scrollInput.addEventListener('mousedown', window.pressMouseHandler);
+      buttonClose.addEventListener('click', window.closeModalHandler);
+      document.addEventListener('keydown', closeEscHandler);
       window.upLoadModal.classList.remove('hidden');
       window.body.classList.add('modal-open');
       zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
@@ -33,6 +34,9 @@
       } else {
         if (comment.length > 140) {
           inputComment.setCustomValidity('длина комментария не может составлять больше 140 символов');
+        }
+        if (comment.length <= 140) {
+          inputComment.setCustomValidity('');
         }
       }
     }
@@ -69,7 +73,7 @@
     }
   };
 
-  window.closeModal = function () {
+  window.closeModalHandler = function () {
     window.upLoadModal.classList.add('hidden');
     window.scrollInput.removeEventListener('mousedown', undefined);
     window.body.classList.remove('modal-open');
@@ -81,17 +85,17 @@
     window.effectLevel.classList.add('hidden');
     zoomContorlSmiller.removeEventListener('click', window.zoomSmillerHandler);
     zoomControllBigger.removeEventListener('click', window.zoomBiggerHandler);
-    buttonClose.removeEventListener('click', window.closeModal);
+    buttonClose.removeEventListener('click', window.closeModalHandler);
   };
 
-  function closeEsc(evtevt) {
+  function closeEscHandler(evtevt) {
     if (!(inputArea.matches(':focus')) && !(inputComment.matches(':focus'))) {
       if (evtevt.keyCode === 27) {
-        window.closeModal();
+        window.closeModalHandler();
       }
     }
   }
-  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
   var fileChooser = document.querySelector('#upload-file');
   window.upLoadPhotoPreview = function () {
     var file = fileChooser.files[0];

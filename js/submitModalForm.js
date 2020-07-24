@@ -6,41 +6,41 @@
   window.successForm = function () {
     var successModal = (document.querySelector('#success').content).cloneNode(true);
     main.appendChild(successModal);
-    document.addEventListener('click', closeSuccessForm);
-    document.addEventListener('keydown', closeSuccess);
+    document.addEventListener('click', closeSuccessHandlerFormHandler);
+    document.addEventListener('keydown', closeSuccessHandler);
   };
 
-  function closeSuccess(evt) {
+  function closeSuccessHandler(evt) {
     if (evt.keyCode === 27) {
-      closeSuccessForm();
+      closeSuccessHandlerFormHandler();
     }
   }
 
   window.errorForm = function () {
     var errorModal = (document.querySelector('#error').content).cloneNode(true);
     main.appendChild(errorModal);
-    document.addEventListener('click', closeErrorForm);
-    document.addEventListener('keydown', closeError);
+    document.addEventListener('click', closeErrorHandlerFormHandler);
+    document.addEventListener('keydown', closeErrorHandler);
   };
 
-  function closeError(evt) {
+  function closeErrorHandler(evt) {
     if (evt.keyCode === 27) {
-      closeErrorForm();
+      closeErrorHandlerFormHandler();
     }
   }
 
-  function closeSuccessForm() {
+  function closeSuccessHandlerFormHandler() {
     var successModalCloser = main.querySelector('.success');
     main.removeChild(successModalCloser);
-    document.removeEventListener('click', closeSuccessForm);
-    document.removeEventListener('keydown', closeSuccess);
+    document.removeEventListener('click', closeSuccessHandlerFormHandler);
+    document.removeEventListener('keydown', closeSuccessHandler);
   }
 
-  function closeErrorForm() {
+  function closeErrorHandlerFormHandler() {
     var errorModalCloser = main.querySelector('.error');
     main.removeChild(errorModalCloser);
-    document.removeEventListener('click', closeErrorForm);
-    document.removeEventListener('keydown', closeError);
+    document.removeEventListener('click', closeErrorHandlerFormHandler);
+    document.removeEventListener('keydown', closeErrorHandler);
   }
 }
 )();
