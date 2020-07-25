@@ -7,8 +7,8 @@
     window.picture.style = 'transform: scale(' + value / 100 + ')';
   }
 
-  var value = parseFloat(document.querySelector('.scale__control--value').value);
   function applyZoomPhoto(valueZoomer) {
+    var value = parseFloat(document.querySelector('.scale__control--value').value);
     value = value + valueZoomer * 25;
     if (value >= 100) {
       value = 100;
@@ -19,10 +19,14 @@
     applyZoom(value);
     return value;
   }
-  window.zoomSmillerHandler = function () {
+  window.zoomSmallerHandler = function () {
+    window.applyEffect(100);
+    window.resetSlider();
     applyZoomPhoto(-1);
   };
   window.zoomBiggerHandler = function () {
+    window.applyEffect(100);
+    window.resetSlider();
     applyZoomPhoto(1);
   };
   window.resetZoomer = function () {

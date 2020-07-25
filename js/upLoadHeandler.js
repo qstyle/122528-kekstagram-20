@@ -8,7 +8,7 @@
   var zoomControllBigger = document.querySelector('.scale__control--bigger');
   var inputComment = document.querySelector('.text__description');
 
-  window.upLoadPhoto = function (evt) {
+  window.uploadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
 
       window.scrollInput.addEventListener('mousedown', window.pressMouseHandler);
@@ -16,9 +16,9 @@
       document.addEventListener('keydown', closeEscHandler);
       window.upLoadModal.classList.remove('hidden');
       window.body.classList.add('modal-open');
-      zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
+      zoomContorlSmiller.addEventListener('click', window.zoomSmallerHandler);
       zoomControllBigger.addEventListener('click', window.zoomBiggerHandler);
-      window.upLoadPhotoPreview();
+      window.uploadPhotoPreview();
     }
 
     if (evt.target.classList.contains('effects__radio')) {
@@ -43,11 +43,11 @@
 
     if (evt.target.classList.contains('text__hashtags')) {
       var hashtags = inputArea.value;
-      var hashtagArray = hashtags.split(' ');
-      if ((hashtagArray.length === 1 && hashtagArray[0] === '')) {
+      var arrayHashtags = hashtags.trim().split(' ');
+      if ((arrayHashtags.length === 1 && arrayHashtags[0] === '')) {
         inputArea.setCustomValidity('');
       } else {
-        var hashtagValidity = window.validiteHashtag(hashtagArray);
+        var hashtagValidity = window.validiteHashtag(arrayHashtags);
         switch (hashtagValidity) {
           case 0:
             inputArea.setCustomValidity('');
@@ -83,21 +83,21 @@
     document.querySelector('#upload-select-image').reset();
     window.resetSlider();
     window.effectLevel.classList.add('hidden');
-    zoomContorlSmiller.removeEventListener('click', window.zoomSmillerHandler);
+    zoomContorlSmiller.removeEventListener('click', window.zoomSmallerHandler);
     zoomControllBigger.removeEventListener('click', window.zoomBiggerHandler);
     buttonClose.removeEventListener('click', window.closeModalHandler);
   };
 
-  function closeEscHandler(evtevt) {
+  function closeEscHandler(evt) {
     if (!(inputArea.matches(':focus')) && !(inputComment.matches(':focus'))) {
-      if (evtevt.keyCode === 27) {
+      if (evt.keyCode === 27) {
         window.closeModalHandler();
       }
     }
   }
 
   var fileChooser = document.querySelector('#upload-file');
-  window.upLoadPhotoPreview = function () {
+  window.uploadPhotoPreview = function () {
     var file = fileChooser.files[0];
     var fileName = file.name.toLowerCase();
     var matches = FILE_TYPES.some(function (it) {

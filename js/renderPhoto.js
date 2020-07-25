@@ -3,13 +3,13 @@
 (function () {
   var picturesContainer = document.querySelector('.pictures');
   var photoElementBlock = document.querySelector('#picture').content;
-  var renderBlockPhoto = function (loadData) {
+  function renderBlockPhoto(loadData) {
     var photoElementClone = photoElementBlock.cloneNode(true);
     photoElementClone.querySelector('.picture__img').src = loadData.url;
     photoElementClone.querySelector('.picture__likes').textContent = loadData.likes;
     photoElementClone.querySelector('.picture__comments').textContent = loadData.comments.length;
     return photoElementClone;
-  };
+  }
 
   function rednerBlockAll(loadData) {
     var fragment = document.createDocumentFragment();

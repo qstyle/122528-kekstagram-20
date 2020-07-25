@@ -18,21 +18,21 @@
     bigPictureComentsCount.textContent = photoObject.comments.length;
     bigPictureComents.innerHTML = '';
 
-    var groupCommentsArray = photoObject.comments.slice();
+    var groupArrayComments = photoObject.comments.slice();
     window.resetCommentArray = function () {
-      groupCommentsArray.splice(0, groupCommentsArray.length);
-      groupCommentsArray = photoObject.comments.slice();
+      groupArrayComments.splice(0, groupArrayComments.length);
+      groupArrayComments = photoObject.comments.slice();
     };
 
     window.renderGroupCommentsHandler = function () {
       var fragment = document.createDocumentFragment();
       window.bigPictureComentsLoader.classList.remove('hidden');
-      var groupComments = groupCommentsArray.splice(0, 5);
+      var groupComments = groupArrayComments.splice(0, 5);
       groupComments.forEach(function (groupComment) {
         fragment.appendChild(window.generateCommentBigPicture(groupComment));
         bigPictureComents.appendChild(fragment);
       });
-      if (groupCommentsArray.length === 0) {
+      if (groupArrayComments.length === 0) {
         window.bigPictureComentsLoader.classList.add('hidden');
       }
     };

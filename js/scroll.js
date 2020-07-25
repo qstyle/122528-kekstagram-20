@@ -9,16 +9,15 @@
   window.pressMouseHandler = function (evtevt) {
     evtevt.preventDefault();
     startScroll = evtevt.clientX;
-    window.effectLevel.addEventListener('mousemove', scrollMoveHandler);
-    window.effectLevel.addEventListener('mouseup', scrollUpHandler);
-    window.effectLevel.addEventListener('mouseleave', scrollUpHandler);
+    window.document.addEventListener('mousemove', scrollMoveHandler);
+    window.document.addEventListener('mouseup', scrollUpHandler);
     return startScroll;
   };
 
   function scrollUpHandler(upEvt) {
     upEvt.preventDefault();
-    window.effectLevel.removeEventListener('mousemove', scrollMoveHandler);
-    window.effectLevel.removeEventListener('mouseup', scrollUpHandler);
+    window.document.removeEventListener('mousemove', scrollMoveHandler);
+    window.document.removeEventListener('mouseup', scrollUpHandler);
   }
 
   function scrollMoveHandler(moveEvt) {
