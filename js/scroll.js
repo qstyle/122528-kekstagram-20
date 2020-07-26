@@ -3,7 +3,7 @@
   var startScroll;
   window.effectLevel = document.querySelector('.img-upload__effect-level');
   window.scrollInput = document.querySelector('.effect-level__pin');
-  window.upLoadModal = document.querySelector('.img-upload__overlay');
+  window.uploadModal = document.querySelector('.img-upload__overlay');
 
   var inputWidth;
   window.pressMouseHandler = function (evtevt) {
