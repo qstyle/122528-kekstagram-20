@@ -1,8 +1,8 @@
 'use strict';
 (function () {
-  function findBigPhoto(pictureSrcNum) {
+  function findBigPhoto(pictureSrcIndex) {
     return window.loadData.find(function find(photo) {
-      return photo.url.indexOf(pictureSrcNum) >= 0;
+      return photo.url.indexOf(pictureSrcIndex) >= 0;
     });
   }
 

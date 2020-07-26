@@ -46,7 +46,7 @@
   function closeErrorFormHandler(evt) {
     var errorModalCloser = main.querySelector('.error');
     var errorModal = document.querySelector('.error__inner');
-    var errorModalText = document.querySelector('.error___title');
+    var errorModalText = document.querySelector('.error__title');
     if (evt.target === errorModal || evt.target === errorModalText) {
       return;
     } else {

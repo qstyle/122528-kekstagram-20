@@ -8,17 +8,17 @@
   var zoomControllBigger = document.querySelector('.scale__control--bigger');
   var inputComment = document.querySelector('.text__description');
 
-  window.upLoadPhoto = function (evt) {
+  window.uploadPhoto = function (evt) {
     if (evt.target.id === 'upload-file') {
 
       window.scrollInput.addEventListener('mousedown', window.pressMouseHandler);
       buttonClose.addEventListener('click', window.closeModalHandler);
       document.addEventListener('keydown', closeEscHandler);
-      window.upLoadModal.classList.remove('hidden');
+      window.uploadModal.classList.remove('hidden');
       window.body.classList.add('modal-open');
-      zoomContorlSmiller.addEventListener('click', window.zoomSmillerHandler);
+      zoomContorlSmiller.addEventListener('click', window.zoomSmallerHandler);
       zoomControllBigger.addEventListener('click', window.zoomBiggerHandler);
-      window.upLoadPhotoPreview();
+      window.uploadPhotoPreview();
     }
 
     if (evt.target.classList.contains('effects__radio')) {
@@ -74,7 +74,7 @@
   };
 
   window.closeModalHandler = function () {
-    window.upLoadModal.classList.add('hidden');
+    window.uploadModal.classList.add('hidden');
     window.scrollInput.removeEventListener('mousedown', undefined);
     window.body.classList.remove('modal-open');
     window.picture.className = 'effects__preview--none';
@@ -83,21 +83,21 @@
     document.querySelector('#upload-select-image').reset();
     window.resetSlider();
     window.effectLevel.classList.add('hidden');
-    zoomContorlSmiller.removeEventListener('click', window.zoomSmillerHandler);
+    zoomContorlSmiller.removeEventListener('click', window.zoomSmallerHandler);
     zoomControllBigger.removeEventListener('click', window.zoomBiggerHandler);
     buttonClose.removeEventListener('click', window.closeModalHandler);
   };
 
-  function closeEscHandler(evtevt) {
+  function closeEscHandler(evt) {
     if (!(inputArea.matches(':focus')) && !(inputComment.matches(':focus'))) {
-      if (evtevt.keyCode === 27) {
+      if (evt.keyCode === 27) {
         window.closeModalHandler();
       }
     }
   }
 
   var fileChooser = document.querySelector('#upload-file');
-  window.upLoadPhotoPreview = function () {
+  window.uploadPhotoPreview = function () {
     var file = fileChooser.files[0];
     var fileName = file.name.toLowerCase();
     var matches = FILE_TYPES.some(function (it) {
@@ -109,7 +109,6 @@
       reader.addEventListener('load', function () {
         window.picture.src = reader.result;
       });
-
       reader.readAsDataURL(file);
     }
   };
