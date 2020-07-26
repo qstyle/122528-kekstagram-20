@@ -43,7 +43,7 @@
 
     if (evt.target.classList.contains('text__hashtags')) {
       var hashtags = inputArea.value;
-      var hashtagArray = hashtags.split(' ');
+      var hashtagArray = hashtags.trim().split(' ');
       if ((hashtagArray.length === 1 && hashtagArray[0] === '')) {
         inputArea.setCustomValidity('');
       } else {
